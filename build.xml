@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="MXUnitTask" basedir="." default="runtests">
+<project name="MXUnitTask" basedir="." default="runtestslocal">
 	
 	<mkdir dir="testresults"/>
 	<mkdir dir="junithtml"/>
 	<mkdir dir="xsl"/>
 	
-	<target name="full" depends="runtests,copy" />
+	<target name="full" depends="runtestsjenkins,copy" />
 
-	<target name="runtests" description="Make output directories and run the MXUnit task">
+	<target name="runtestslocal" description="Make output directories and run the MXUnit task">
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
 		<mxunittask server="127.0.0.1"
 			defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
@@ -27,6 +27,29 @@
 			                     recurse="false"
 			                    />
 		</mxunittask>
+		<fail if="testsfailed" message="Existem testes com falhas"/>
+	</target>
+	
+	<target name="runtestsjenkins" description="Make output directories and run the MXUnit task">
+		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
+			<mxunittask server="localhost"
+				defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
+				port="80"
+				outputdir="testresults" 
+				verbose="true"
+	 			haltonfailure="false"
+	   			haltonerror="false"
+				failureproperty="testsfailed">		
+				
+				
+				<directory runner="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests/HttpAntRunner.cfc"
+				                     remoteMethod="run"
+				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests"
+				                     packageName="mxunit-jenkins.tests"
+				                     componentPath="mxunit-jenkins.tests"
+				                     recurse="false"
+				                    />
+			</mxunittask>
 		<fail if="testsfailed" message="Existem testes com falhas"/>
 	</target>
 		
