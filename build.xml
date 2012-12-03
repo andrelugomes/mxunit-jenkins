@@ -34,9 +34,9 @@
 	<target name="runtestsjenkins" description="Make output directories and run the MXUnit task">
 		<echo message="Executando testes com Jenkins"/>
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
-			<mxunittask server="localhost"
-				defaultrunner="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/mxunit/tests/HttpAntRunner.cfc"
-				port="80"
+			<mxunittask server="127.0.0.1"
+				defaultrunner="/mxunit/tests/HttpAntRunner.cfc"
+				port="8305"
 				outputdir="testresults" 
 				verbose="true"
 	 			haltonfailure="false"
@@ -44,7 +44,7 @@
 				failureproperty="testsfailed">		
 				
 				
-				<directory runner="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/mxunit/tests/HttpAntRunner.cfc"
+				<directory runner="/mxunit/tests/HttpAntRunner.cfc"
 				                     remoteMethod="run"
 				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests"
 				                     packageName="mxunit-jenkins.tests"
