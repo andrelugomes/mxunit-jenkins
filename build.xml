@@ -35,7 +35,7 @@
 		<echo message="Executando testes com Jenkins"/>
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
 			<mxunittask server="localhost"
-				defaultrunner="testes/mxunit/tests/HttpAntRunner.cfc"
+				defaultrunner="/testes/mxunit/tests/HttpAntRunner.cfc"
 				port="80"
 				outputdir="testresults" 
 				verbose="true"
@@ -44,7 +44,7 @@
 				failureproperty="testsfailed">		
 				
 				
-				<directory runner="testes/mxunit/tests/HttpAntRunner.cfc"
+				<directory runner="/testes/mxunit/tests/HttpAntRunner.cfc"
 				                     remoteMethod="run"
 				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests"
 				                     packageName="mxunit-jenkins.tests"
