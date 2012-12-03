@@ -33,8 +33,9 @@
 	
 	<target name="runtestsjenkins" description="Make output directories and run the MXUnit task">
 		<echo message="Executando testes com Jenkins"/>
+		<echo message="Deacordo com o Start do Server CF chamado testes na porta 8305 "/>
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
-			<mxunittask server="127.0.0.1"
+			<mxunittask server="localhost"
 				defaultrunner="/mxunit/tests/HttpAntRunner.cfc"
 				port="8305"
 				outputdir="testresults" 
@@ -44,7 +45,7 @@
 				failureproperty="testsfailed">		
 				
 				
-				<directory runner="/mxunit/tests/HttpAntRunner.cfc"
+				<directory runner="	/mxunit/tests/HttpAntRunner.cfc"
 				                     remoteMethod="run"
 				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests"
 				                     packageName="mxunit-jenkins.tests"
