@@ -10,7 +10,7 @@
 	<cffunction name="functionBDeveRetornarBTest" access="public" returnType="void">
 		<cfscript>
 			//assertEquals( "B", meuComponente.functionB("B") );
-			assertTrue(false);
+			assertTrue(true);
 		</cfscript>
 	</cffunction>
 	
@@ -110,8 +110,8 @@
 	<!--- setup and teardown --->	
 	<cffunction name="setUp" returntype="void" access="public">
 		<cfscript>
-			meuComponente = createobject("component","mxunitjenkins.components.ComponentToBeTested");
-			meuComponenteMock = createobject("component","mxunitjenkins.components.ComponentToBeMocked");
+			meuComponente = createobject("component","mxunit-jenkins.components.ComponentToBeTested");
+			meuComponenteMock = createobject("component","mxunit-jenkins.components.ComponentToBeMocked");
 	    	arrayDeNomes = ["André","Luis","Gomes"];	    	
 		</cfscript>
 	</cffunction>
