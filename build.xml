@@ -8,6 +8,8 @@
 	<target name="full" depends="runtestsjenkins,copy" />
 
 	<target name="runtestslocal" description="Make output directories and run the MXUnit task">
+		<echo message="Executando testes locais"/>
+
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
 		<mxunittask server="127.0.0.1"
 			defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
@@ -16,8 +18,7 @@
 			verbose="true"
  			haltonfailure="false"
    			haltonerror="false"
-			failureproperty="testsfailed">		
-			
+			failureproperty="testsfailed">
 			
 			<directory runner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
 			                     remoteMethod="run"
@@ -31,9 +32,10 @@
 	</target>
 	
 	<target name="runtestsjenkins" description="Make output directories and run the MXUnit task">
+		<echo message="Executando testes com Jenkins"/>
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
 			<mxunittask server="localhost"
-				defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
+				defaultrunner="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/mxunit/tests/HttpAntRunner.cfc"
 				port="80"
 				outputdir="testresults" 
 				verbose="true"
@@ -42,7 +44,7 @@
 				failureproperty="testsfailed">		
 				
 				
-				<directory runner="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests/HttpAntRunner.cfc"
+				<directory runner="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/mxunit/tests/HttpAntRunner.cfc"
 				                     remoteMethod="run"
 				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests"
 				                     packageName="mxunit-jenkins.tests"
@@ -53,10 +55,9 @@
 		<fail if="testsfailed" message="Existem testes com falhas"/>
 	</target>
 		
-	<description>Copia arquivos do JOB para o SERVER ColdFusion</description>
 	<target name="copy">
-		<echo>Publicando em QA</echo>
-		<copy todir="/var/www/htdocs-testes/mxunit-jenkins/" overwrite="true">  
+		<echo>Publicando do job/workspace para o Server CF</echo>
+		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/mxunit-jenkins/" overwrite="true">  
 	        <fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
 	        	<include name="**/**" />
 	        </fileset>  
