@@ -10,7 +10,7 @@
 	<cffunction name="functionBDeveRetornarBTest" access="public" returnType="void">
 		<cfscript>
 			//assertEquals( "B", meuComponente.functionB("B") );
-			assertTrue(true);
+			assertTrue(false);
 		</cfscript>
 	</cffunction>
 	
