@@ -44,7 +44,7 @@
 				failureproperty="testsfailed">		
 				
 				
-				<directory runner="/testes/mxunit/tests/HttpAntRunner.cfc"
+				<directory runner="/mxunit/tests/HttpAntRunner.cfc"
 				                     remoteMethod="run"
 				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests"
 				                     packageName="mxunit-jenkins.tests"
