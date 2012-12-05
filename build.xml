@@ -154,7 +154,7 @@
 		<!--<antcall target="junitreport" />-->
 		<!-- Publica arquivos apos o build -->
 		<!--<antcall target="copy" />-->
-		<fail if="tests.bombed" message="Failing the build due to test failures"/>
+		<fail if="tests.bombed" message="Existem testes com erros"/>
 	</target>
 
 
@@ -177,7 +177,11 @@
 		<attribute name="directoryName"/>
 		<attribute name="excludes" default=""/>
 		<sequential>
-			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}" verbose="true" failureproperty="tests.bombed" errorproperty="tests.bombed">
+			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}"
+				verbose="true" failureproperty="tests.bombed"
+				errorproperty="tests.bombed" 
+	 			haltonfailure="true"
+	   			haltonerror="true">
 				<directory path="${test.dir.location}/@{directoryName}" recurse="true" packageName="${test.cfcpath}.@{directoryName}" componentPath="${test.cfcpath}.@{directoryName}" excludes="@{excludes}" />
 			</mxunittask>
 		</sequential>
