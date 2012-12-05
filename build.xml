@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="MXUnitTask" basedir="." default="runtests">
 	<target name="init">
+		<echo message="Criando diretórios"/>
 		<mkdir dir="testresults"/>
 		<mkdir dir="junithtml"/>
 		<mkdir dir="xsl"/>
@@ -39,7 +40,7 @@
 			<mxunittask server="cfusion"
 				defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
 				port="80"
-				outputdir="testresults" 
+				outputdir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/testresults" 
 				verbose="true"
 	 			haltonfailure="false"
 	   			haltonerror="false"
