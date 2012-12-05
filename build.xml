@@ -180,8 +180,7 @@
 			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}"
 				verbose="true" failureproperty="tests.bombed"
 				errorproperty="tests.bombed" 
-	 			haltonfailure="true"
-	   			haltonerror="true">
+	 			haltonfailure="false" haltonerror="false">
 				<directory path="${test.dir.location}/@{directoryName}" recurse="true" packageName="${test.cfcpath}.@{directoryName}" componentPath="${test.cfcpath}.@{directoryName}" excludes="@{excludes}" />
 			</mxunittask>
 		</sequential>
