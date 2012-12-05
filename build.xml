@@ -113,9 +113,9 @@
 		
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
 
-		<!-- dump the properties -->
+		<!-- dump the properties 
 		<echoproperties prefix="test" />
-		<echoproperties prefix="dist" />
+		<echoproperties prefix="dist" />-->
 	</target>
 
 	<target name="clean" depends="init">
