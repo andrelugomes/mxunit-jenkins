@@ -37,7 +37,7 @@
 	<target name="runtestsjenkins" description="Make output directories and run the MXUnit task">
 		<echo message="Executando testes com Jenkins"/>
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask"  classpath="ant/lib/mxunit-ant.jar" />
-			<mxunittask server="cfusion"
+			<mxunittask server="cfusion" 
 				defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
 				port="80"
 				outputdir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/testresults" 
@@ -49,7 +49,7 @@
 				
 				<directory runner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
 				                     remoteMethod="run"
-				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/tests"
+				                     path="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/tests"
 				                     packageName="mxunit-jenkins.tests"
 				                     componentPath="mxunit-jenkins.tests"
 				                     recurse="false"
