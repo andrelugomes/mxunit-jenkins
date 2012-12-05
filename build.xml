@@ -139,10 +139,6 @@
 		<runTestDirectory directoryName="" excludes="null"/>
 	</target>
 	
-	<target name="runUITests" depends="init,reinitApp">
-		<mkdir dir="${test.output.xml}/UI" />
-		<runTestDirectory directoryName="UI" excludes=""/>		
-	</target>
 	
 	<target name="reinitApp" depends="init">
 		<!-- replace 'reset_app' with any url params you use to reset your application (e.g., init=true, etc) -->
@@ -153,7 +149,7 @@
 		</loadresource>
 	</target>
 
-	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests,runUITests">
+	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests">
 		<!-- generate pretty reports -->
 		<antcall target="junitreport" />
 		<!-- Publica arquivos apos o build -->
