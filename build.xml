@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="MXUnitTask" basedir="." default="runtestslocal">
+<project name="MXUnitTask" basedir="." default="runtests">
+	<target name="init">
+		<mkdir dir="testresults"/>
+		<mkdir dir="junithtml"/>
+		<mkdir dir="xsl"/>
+	</target>
 	
-	<mkdir dir="testresults"/>
-	<mkdir dir="junithtml"/>
-	<mkdir dir="xsl"/>
-	
-	<target name="full" depends="runtestsjenkins,copy" />
+	<target name="full" depends="init,runtestsjenkins,copy" />
+	<target name="runtests" depends="init,runtestslocal" />
 
 	<target name="runtestslocal" description="Make output directories and run the MXUnit task">
 		<echo message="Executando testes locais"/>
@@ -37,7 +39,7 @@
 			<mxunittask server="cfusion"
 				defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
 				port="80"
-				outputdir="/mxunit-jenkins/testresults" 
+				outputdir="testresults" 
 				verbose="true"
 	 			haltonfailure="false"
 	   			haltonerror="false"
