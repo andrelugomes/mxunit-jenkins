@@ -40,7 +40,7 @@
 			<mxunittask server="cfusion"
 				defaultrunner="/mxunit-jenkins/tests/HttpAntRunner.cfc"
 				port="80"
-				outputdir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/mxunit-jenkins/testresults" 
+				outputdir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/testresults" 
 				verbose="true"
 	 			haltonfailure="false"
 	   			haltonerror="false"
