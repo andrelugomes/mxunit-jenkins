@@ -49,7 +49,7 @@
 		</cfscript>
 	</cffunction>
 		
-	<!--- TEstando métodos privados --->
+	<!--- TEstando mï¿½todos privados --->
 	<cffunction name="functionFPrivateDeveRetornarFooTest" access="public" returnType="void">
 		<cfscript>
 			makepublic(meuComponente,"functionF");
@@ -92,19 +92,19 @@
 		
 	
 	<!--- Data providers 
-		Irá prover um objeto e o assert ira ingterar neste objeto--->
+		Irï¿½ prover um objeto e o assert ira ingterar neste objeto--->
 	<cfscript>
 		/**
 	    *@mxunit:dataprovider arrayDeNomes
 	    */
 		function functionHRecebeUmArrayERetornaTrueTest(String array){
-			assertTrue(meuComponente.functionH(array,arrayDeNomes),"#array# não existe no array");
+			assertTrue(meuComponente.functionH(array,arrayDeNomes),"#array# nï¿½o existe no array");
 		}
 	</cfscript>
 	
 	<cffunction name="functionHRecebeUmArrayERetornaTrue2Test" returntype="void" mxunit:dataprovider="arrayDeNomes">
 		<cfargument name="array" hint="interagi no DataProvider e retorna um data pr acada valor">
-		<cfset assertTrue(meuComponente.functionH(array,arrayDeNomes),"#array# não existe no array")>
+		<cfset assertTrue(meuComponente.functionH(array,arrayDeNomes),"#array# nï¿½o existe no array")>
 	</cffunction>
 		
 	<!--- setup and teardown --->	
@@ -112,11 +112,12 @@
 		<cfscript>
 			meuComponente = createobject("component","mxunit-jenkins.components.ComponentToBeTested");
 			meuComponenteMock = createobject("component","mxunit-jenkins.components.ComponentToBeMocked");
-	    	arrayDeNomes = ["André","Luis","Gomes"];	    	
+	    	arrayDeNomes = ["AndrÃ©","Luis","Gomes"];	    	
 		</cfscript>
 	</cffunction>
 
 	<cffunction name="tearDown" returntype="void" access="public">
 		<!--- Any code needed to return your environment to normal goes here --->
-	</cffunction>	
+	</cffunction>
+		
 </cfcomponent>
