@@ -149,7 +149,7 @@
 		</loadresource>
 	</target>
 
-	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests,junitreport,copy">
+	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests,copy">
 		<!-- generate pretty reports -->
 		<!--<antcall target="junitreport" />-->
 		<!-- Publica arquivos apos o build -->
