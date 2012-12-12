@@ -107,6 +107,11 @@
 		<cfset assertTrue(meuComponente.functionH(array,arrayDeNomes),"#array# n�o existe no array")>
 	</cffunction>
 		
+	<cffunction name="failTest" returntype="void">
+		<cfset assertTrue(false)>
+	</cffunction>
+	
+		
 	<!--- setup and teardown --->	
 	<cffunction name="setUp" returntype="void" access="public">
 		<cfscript>
