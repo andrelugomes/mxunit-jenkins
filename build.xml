@@ -200,12 +200,12 @@
 					</fileset>  
 				</copy>
 			</then>
-			<elseif>
-			<equals arg1="${mxunit.fail}" arg2="true" />
+		<elseif>
+		<equals arg1="tests.bombed" arg2="true" />
 			<then>
-				<echo>Build. Não sera publicado</echo>
+				<echo>Build. Não sera publicado	</echo>
 			</then>
-			</elseif>
+		</elseif>
 		</if>
 	</target>
 
