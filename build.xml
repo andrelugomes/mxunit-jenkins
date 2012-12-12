@@ -143,6 +143,7 @@
 
 	<target name="runAllTestsLocal" description="Make output directories and run the MXUnit task"  depends="initLocalProperties,runUnitTestsLocal,copy">
 		<fail if="tests.bombed" message="Existem testes com erros"/>
+		<echoproperties prefix="tests" />
 	</target>
 	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests,copy">
 		<fail if="tests.bombed" message="Existem testes com erros"/>
@@ -180,19 +181,19 @@
 	
 	<!--Copy files-->
 	<target name="copy" depends="conditionalToCopyFiles" if="copy.them">
-		<echo message="Publicando do job do workspace para o Server CF"/>
-			<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">  
-				<fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
-					<include name="**/**" />
-					<exclude name=".git/**"/>
-					<exclude name=".settings/**"/>
-				</fileset>  
-			</copy>
+		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">  
+			<fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
+				<include name="**/**" />
+				<exclude name=".git/**"/>
+				<exclude name=".settings/**"/>
+			</fileset>  
+		</copy>
 	</target>
 	
 	<target name="conditionalToCopyFiles">
 		<condition property="copy.them" value="true">
-			<equals arg1="tests.bombed" arg2="false"/>
+			<!--<equals arg1="${tests.bombed}" arg2="false"/>-->
+			<isfalse value="${tests.bombed}"/>
 		</condition>
 	</target>
 
