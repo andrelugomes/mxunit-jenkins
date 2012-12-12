@@ -182,20 +182,31 @@
 				errorproperty="tests.bombed" 
 	 			haltonfailure="false" haltonerror="false">
 				<directory path="${test.dir.location}/@{directoryName}" recurse="true" packageName="${test.cfcpath}.@{directoryName}" componentPath="${test.cfcpath}.@{directoryName}" excludes="@{excludes}" />
-			</mxunittask>
+			</mxunittask>			
 		</sequential>
 	</macrodef>
 
 	<!--Copy files-->
 	<target name="copy">
-		<echo>Publicando do job/workspace para o Server CF</echo>
-		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">  
-	        <fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
-	        	<include name="**/**" />
-	        	<exclude name=".git/**"/>
-	        	<exclude name=".settings/**"/>
-	        </fileset>  
-		</copy>
+		<if>
+		<equals arg1="tests.bombed" arg2="false" />
+			<then>
+			<echo>Publicando do job do workspace para o Server CF</echo>
+				<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">  
+					<fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
+						<include name="**/**" />
+						<exclude name=".git/**"/>
+						<exclude name=".settings/**"/>
+					</fileset>  
+				</copy>
+			</then>
+			<elseif>
+			<equals arg1="${mxunit.fail}" arg2="true" />
+			<then>
+				<echo>Build. Não sera publicado</echo>
+			</then>
+			</elseif>
+		</if>
 	</target>
 
 </project>
