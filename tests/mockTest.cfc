@@ -108,7 +108,7 @@
 	</cffunction>
 		
 	<cffunction name="failTest" returntype="void">
-		<cfset assertTrue(true)>
+		<cfset assertTrue(false)>
 	</cffunction>
 	
 		
