@@ -108,10 +108,19 @@
 	</cffunction>
 		
 	<cffunction name="failTest" returntype="void">
-		<cfset assertTrue(false)>
+		<cfset assertTrue(true)>
 	</cffunction>
 	
-		
+	<!--- injectMethod --->
+	<cffunction name="funcaoCExecutaFuncaoATest" returntype="void">
+		<cfscript>
+		injectMethod(meuComponente, this, "FunctionAMock", "FunctionC");
+		teste = meuComponente.FunctionC("{string}");
+		assertequals("XXX",teste);
+		</cfscript>
+	</cffunction>
+	
+			
 	<!--- setup and teardown --->	
 	<cffunction name="setUp" returntype="void" access="public">
 		<cfscript>
@@ -124,5 +133,8 @@
 	<cffunction name="tearDown" returntype="void" access="public">
 		<!--- Any code needed to return your environment to normal goes here --->
 	</cffunction>
-		
+	
+	<cffunction name="FunctionAMock" access="private" output="false" returntype="string">
+		<cfreturn "XXX"/>
+	</cffunction>	
 </cfcomponent>
