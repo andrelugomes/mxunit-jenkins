@@ -75,8 +75,8 @@
 		<!-- ////////   MXUNIT ANT TASK SETUP (used in runtests and junitreport targets) -->
 		
 		<!-- what server and port should your tests run against? -->
-		<property name="test.server" value="localhost" />
-		<property name="test.serverport" value="8300" />
+		<property name="test.server" value="cfusion.dclicknet.com" />
+		<property name="test.serverport" value="80" />
 		<!-- what "runner" URL should the tests hit. In this example, you'd be hitting http://localhost:80/DirectoryNameOfYourProject/test/HttpAntRunner.cfc  Simply copy mxunit/samples/HttpAntRunner.cfc into your test directory! -->
 		<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />
 		
@@ -124,6 +124,7 @@
 	<target name="runUnitTests" depends="init">
 		<mkdir dir="${test.output.xml}" />
 		<runTestDirectory directoryName="" excludes="null"/>
+		<fail if="tests.bombed" message="Existem testes com erros"/>
 	</target>
 	<target name="runUnitTestsLocal">
 		<mkdir dir="${test.output.xml}/unit" />
