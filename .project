@@ -8,6 +8,5 @@
 	</buildSpec>
 	<natures>
 		<nature>com.adobe.ide.coldfusion.projectNature</nature>
-		<nature>org.cfeclipse.cfml.CFENature</nature>
 	</natures>
 </projectDescription>
