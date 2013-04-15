@@ -62,7 +62,7 @@
 		
 		<!-- what's the name of the directory where your tests live? Note: this is just the name of the directory, not the full path-->
 		<!-- ATENÇÃO PARA ESTE DIRETÓRIO -->
-		<property name="test.dir.name" value="tests/runner" />
+		<property name="test.dir.name" value="runner" />
 
 		<!-- where do your tests live, relative to this build file? test.dir.location will be a full path to a directory -->
 		<property name="test.dir.location" location="${test.dir.name}" />
