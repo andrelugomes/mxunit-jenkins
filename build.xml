@@ -29,7 +29,7 @@
 			<property name="test.cfcpath" value="${application.name}.${test.dir.name}" />
 
 			<property name="test.server" value="127.0.0.1" />
-			<property name="test.serverport" value="8501" />
+			<property name="test.serverport" value="8500" />
 			<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />
 			
 			<property name="test.output" location="${test.dir.name}/testresults" />
@@ -145,7 +145,7 @@
 		</loadresource>
 	</target>
 
-	<target name="runAllTestsLocal" description="Make output directories and run the MXUnit task"  depends="initLocalProperties,runUnitTestsLocal,copy">
+	<target name="runAllTestsLocal" description="Make output directories and run the MXUnit task"  depends="initLocalProperties,runUnitTestsLocal">
 		<fail if="tests.bombed" message="Existem testes com erros"/>
 		<echoproperties prefix="tests" />
 	</target>
