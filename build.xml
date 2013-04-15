@@ -61,7 +61,8 @@
 		<property name="application.name" value="mxunit-jenkins" />
 		
 		<!-- what's the name of the directory where your tests live? Note: this is just the name of the directory, not the full path-->
-		<property name="test.dir.name" value="tests" />
+		<!-- ATENÇÃO PARA ESTE DIRETÓRIO -->
+		<property name="test.dir.name" value="tests/runner" />
 
 		<!-- where do your tests live, relative to this build file? test.dir.location will be a full path to a directory -->
 		<property name="test.dir.location" location="${test.dir.name}" />
