@@ -124,7 +124,7 @@
 		<mkdir dir="${dist.dir}" />
 	</target>
 
-	<target name="runUnitTests" depends="init">
+	<target name="runUnitTests">
 		<mkdir dir="${test.output.xml}" />
 		<runTestDirectory directoryName="" excludes="null" />
 		<fail if="tests.bombed" message="Existem testes com erros" />
