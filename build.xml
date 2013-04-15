@@ -78,7 +78,9 @@
 		<property name="test.server" value="cfusion.dclicknet.com" />
 		<property name="test.serverport" value="80" />
 		<!-- what "runner" URL should the tests hit. In this example, you'd be hitting http://localhost:80/DirectoryNameOfYourProject/test/HttpAntRunner.cfc  Simply copy mxunit/samples/HttpAntRunner.cfc into your test directory! -->
-		<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />
+		<!-- <property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" /> -->
+		<!-- acontece que na pasta de jobs do Jenkins não possui um server CF pra rodar o HttpAntRunner.cfc. Assim direcionamos para o framework previamente instalado no Server CFUSION-->
+		<property name="test.runner" value="/mxunit/${test.dir.name}/HttpAntRunner.cfc" />
 		
 		<!-- this is where the xml and html will live for the report generator and Jenkins -->
 		<property name="test.output" location="${test.dir.name}/testresults" />
