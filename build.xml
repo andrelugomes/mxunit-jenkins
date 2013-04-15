@@ -17,49 +17,49 @@
 	 	DirectoryNameOfYourProject/deploy/*.zip
 	 
 	-->
-	
-		<target name="initLocalProperties">
 
-			<property name="application.name" value="mxunit-jenkins" />
-			
-			<property name="test.dir.name" value="tests" />
+	<target name="initLocalProperties">
 
-			<property name="test.dir.location" location="${test.dir.name}" />
+		<property name="application.name" value="mxunit-jenkins" />
 
-			<property name="test.cfcpath" value="${application.name}.${test.dir.name}" />
+		<property name="test.dir.name" value="tests" />
 
-			<property name="test.server" value="127.0.0.1" />
-			<property name="test.serverport" value="8500" />
-			<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />
-			
-			<property name="test.output" location="${test.dir.name}/testresults" />
-			<property name="test.output.xml" location="${test.output}/xml" />
-			<property name="test.junitoutput" location="${test.output}/html" />
-			<property name="dist.dir" location="deploy" />
-			
-			<property name="dist.zip" value="${application.name}.zip" />
-			
-			<property name="dist.prefixInZip" value="${application.name}" />
+		<property name="test.dir.location" location="${test.dir.name}" />
 
-			<path id="project.classpath">
-				<fileset dir="ant/lib">
-					<include name="**/*.jar" />
-				</fileset>
-			</path>
-			
-			<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
+		<property name="test.cfcpath" value="${application.name}.${test.dir.name}" />
 
-			<echoproperties prefix="test" />
-			<echoproperties prefix="dist" />
-		</target>
-			
+		<property name="test.server" value="127.0.0.1" />
+		<property name="test.serverport" value="8500" />
+		<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />
+
+		<property name="test.output" location="${test.dir.name}/testresults" />
+		<property name="test.output.xml" location="${test.output}/xml" />
+		<property name="test.junitoutput" location="${test.output}/html" />
+		<property name="dist.dir" location="deploy" />
+
+		<property name="dist.zip" value="${application.name}.zip" />
+
+		<property name="dist.prefixInZip" value="${application.name}" />
+
+		<path id="project.classpath">
+			<fileset dir="ant/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+
+		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
+
+		<echoproperties prefix="test" />
+		<echoproperties prefix="dist" />
+	</target>
+
 	<target name="init">
 
 		<!-- ////////   DIRECTORY AND CFC PATH SETUP (used in all targets) -->
-		
+
 		<!-- what's the directory name of your application? this value will be used throughout this build file; if you don't want that, just replace the references to ${application.name} with your desired values -->
 		<property name="application.name" value="mxunit-jenkins" />
-		
+
 		<!-- what's the name of the directory where your tests live? Note: this is just the name of the directory, not the full path-->
 		<!-- ATENÇÃO PARA ESTE DIRETÓRIO -->
 		<property name="test.dir.name" value="tests" />
@@ -70,11 +70,11 @@
 		<!-- what is the cfc dot-notation path to that directory, as ColdFusion sees it? -->
 		<property name="test.cfcpath" value="${application.name}.${test.dir.name}" />
 
-		
-		
-		
+
+
+
 		<!-- ////////   MXUNIT ANT TASK SETUP (used in runtests and junitreport targets) -->
-		
+
 		<!-- what server and port should your tests run against? -->
 		<property name="test.server" value="cfusion.dclicknet.com" />
 		<property name="test.serverport" value="80" />
@@ -82,7 +82,7 @@
 		<!-- <property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" /> -->
 		<!-- acontece que na pasta de jobs do Jenkins não possui um server CF pra rodar o HttpAntRunner.cfc. Assim direcionamos para o framework previamente instalado no Server CFUSION-->
 		<property name="test.runner" value="/mxunit/runner/HttpAntRunner.cfc" />
-		
+
 		<!-- this is where the xml and html will live for the report generator and Jenkins -->
 		<property name="test.output" location="${test.dir.name}/testresults" />
 		<property name="test.output.xml" location="${test.output}/xml" />
@@ -91,13 +91,13 @@
 
 
 		<!-- ////////   ZIP-FILE SETUP (used by "dist" target) -->
-		
+
 		<!-- where the zip file for deployment will live -->
 		<property name="dist.dir" location="deploy" />
-		
-		<!-- what to call it -->		
+
+		<!-- what to call it -->
 		<property name="dist.zip" value="${application.name}.zip" />
-		
+
 		<!-- what to start the "path" in the zip with -->
 		<property name="dist.prefixInZip" value="${application.name}" />
 
@@ -113,7 +113,7 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
-		
+
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
 
 	</target>
@@ -126,31 +126,31 @@
 
 	<target name="runUnitTests" depends="init">
 		<mkdir dir="${test.output.xml}" />
-		<runTestDirectory directoryName="" excludes="null"/>
-		<fail if="tests.bombed" message="Existem testes com erros"/>
+		<runTestDirectory directoryName="" excludes="null" />
+		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
 	<target name="runUnitTestsLocal">
 		<mkdir dir="${test.output.xml}/unit" />
-		<runTestDirectory directoryName="" excludes="null"/>
-		<fail if="tests.bombed" message="Existem testes com erros"/>
+		<runTestDirectory directoryName="" excludes="null" />
+		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
-	
-	
+
+
 	<target name="reinitApp" depends="init">
 		<!-- replace 'reset_app' with any url params you use to reset your application (e.g., init=true, etc) -->
-		<property name="reinitURL" value="http://${test.server}:${test.serverport}/${application.name}/index.cfm?reset_app=true"/>
-		<echo message="reiniting app at ${reinitURL}"/>
+		<property name="reinitURL" value="http://${test.server}:${test.serverport}/${application.name}/index.cfm?reset_app=true" />
+		<echo message="reiniting app at ${reinitURL}" />
 		<loadresource property="test.reinitAppOutput">
-			<url url="${reinitURL}"/>
+			<url url="${reinitURL}" />
 		</loadresource>
 	</target>
 
-	<target name="runAllTestsLocal" description="Make output directories and run the MXUnit task"  depends="initLocalProperties,runUnitTestsLocal">
-		<fail if="tests.bombed" message="Existem testes com erros"/>
+	<target name="runAllTestsLocal" description="Make output directories and run the MXUnit task" depends="initLocalProperties,runUnitTestsLocal,dist">
+		<fail if="tests.bombed" message="Existem testes com erros" />
 		<echoproperties prefix="tests" />
 	</target>
-	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests,copy">
-		<fail if="tests.bombed" message="Existem testes com erros"/>
+	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests,dist">
+		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
 
 
@@ -170,36 +170,50 @@
 	</target>
 
 	<macrodef name="runTestDirectory">
-		<attribute name="directoryName"/>
-		<attribute name="excludes" default=""/>
+		<attribute name="directoryName" />
+		<attribute name="excludes" default="" />
 		<sequential>
-			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}"
-				verbose="true" failureproperty="tests.bombed"
-				errorproperty="tests.bombed" 
-	 			haltonfailure="false" haltonerror="false">
+			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}" verbose="true" failureproperty="tests.bombed" errorproperty="tests.bombed" haltonfailure="false" haltonerror="false">
 				<directory path="${test.dir.location}/@{directoryName}" recurse="true" packageName="${test.cfcpath}.@{directoryName}" componentPath="${test.cfcpath}.@{directoryName}" excludes="@{excludes}" />
-			</mxunittask>			
+			</mxunittask>
 		</sequential>
 	</macrodef>
 
-	
+
 	<!--Copy files-->
 	<target name="copy" depends="conditionalToCopyFiles" if="copy.them">
-		
+
 		<description>Copiando..</description>
-		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">  
+		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">
 			<fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
 				<include name="**/**" />
-				<exclude name=".git/**"/>
-				<exclude name=".settings/**"/>
-			</fileset>  
+				<exclude name=".git/**" />
+				<exclude name=".settings/**" />
+			</fileset>
 		</copy>
 	</target>
-	
+
+	<!--Deploy files in CF SERVER-->
+	<target name="deploy" depends="conditionalToCopyFiles" if="copy.them">
+
+		<description>Deploying...</description>
+		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">
+			<fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
+				<include name="**/**" />
+				<exclude name=".git/**" />
+				<exclude name=".settings/**" />
+				<exclude name="tests/**" />
+				<exclude name="ant/**" />
+				<exclude name="*.xml" />
+				<exclude name="*.properties" />
+			</fileset>
+		</copy>
+	</target>
+
 	<target name="conditionalToCopyFiles">
 		<condition property="copy.them" value="true">
 			<!--<equals arg1="${tests.bombed}" arg2="false"/>-->
-			<isfalse value="${tests.bombed}"/>
+			<isfalse value="${tests.bombed}" />
 		</condition>
 	</target>
 
