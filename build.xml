@@ -53,8 +53,15 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
+		
+		<path id="ant.junit.classpath">
+			<fileset dir="ant/lib">
+				<include name="ant-junit-1.8.2.jar.jar" />
+			</fileset>
+		</path>
 
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath"  />
+		<taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator" classpathref="ant.junit.classpath"  />
 
 	</target>
 
