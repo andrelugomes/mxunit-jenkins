@@ -189,8 +189,8 @@
 	<!--Deleta o projeto que foi copiado para o server de testes -->
 		<target name="deleteFromServerTests" depends="conditionalToCopyFiles" if="copy.them">
 			<echo>Deletando arquivos do server de testes...</echo>
-			<delete>
-				<fileset dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" verbose="true" includeemptydirs="true"/>
+			<delete verbose="true" includeemptydirs="true">
+				<fileset dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" />
 			</delete> 
 		</target>
 	<!--Copy files-->
