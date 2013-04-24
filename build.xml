@@ -93,7 +93,7 @@
 		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
 
-	<target name="junitreport" description="Gerar relatorio de testes do JUnit" depends="conditionalToCopyFiles" if="copy.them">
+	<target name="junitreport" description="Gerar relatorio de testes do JUnit" depends="runUnitTests">
 		<junitreport todir="${test.junitoutput}">
 			<fileset dir="${test.output.xml}">
 				<include name="*.xml" />
