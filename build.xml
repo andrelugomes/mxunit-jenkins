@@ -142,7 +142,7 @@
 		<fail if="tests.bombed" message="Existem testes com erros" />
 		<echoproperties prefix="tests" />
 	</target>
-	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,copyToServerTests,runUnitTests,deleteFromServerTests,dist">
+	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,copyToServerTests,runUnitTests,deleteFromServerTests,dist,homolog">
 		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
 
@@ -187,29 +187,17 @@
 		</copy>
 	</target>
 	<!--Deleta o projeto que foi copiado para o server de testes -->
-		<target name="deleteFromServerTests" depends="conditionalToCopyFiles" if="copy.them">
-			<echo>Deletando arquivos do server de testes...</echo>
-			<delete verbose="true" includeemptydirs="true">
-				<fileset dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" />
-			</delete> 
-		</target>
-	<!--Copy files-->
-	<target name="copy" depends="conditionalToCopyFiles" if="copy.them">
-		<description>Copiando..</description>
-		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">
-			<fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
-				<include name="**/**" />
-				<exclude name=".git/**" />
-				<exclude name=".settings/**" />
-			</fileset>
-		</copy>
+	<target name="deleteFromServerTests" depends="conditionalToCopyFiles" if="copy.them">
+		<echo>Deletando arquivos do server de testes...</echo>
+		<delete verbose="true" includeemptydirs="true">
+			<fileset dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" />
+		</delete> 
 	</target>
-
+	
 	<!--Deploy files in CF SERVER-->
-	<target name="deploy" depends="conditionalToCopyFiles" if="copy.them">
-
-		<description>Deploying...</description>
-		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true">
+	<target name="homolog" depends="conditionalToCopyFiles" if="copy.them">
+		<echo>Publicando para homologação</echo>
+		<copy todir="/opt/jrun4/servers/cfusion/cfusion-ear/cfusion-war/mxunit-jenkins/" overwrite="true" verbose="true">
 			<fileset dir="/var/lib/jenkins/jobs/mxunit-jenkins/workspace/">
 				<include name="**/**" />
 				<exclude name=".git/**" />
