@@ -176,6 +176,10 @@
 	<target name="copyToServerTests">
 		<description>Copiar arquivos para o server de testes</description>
 		<echo>Copiando para o server de testes...</echo>
+		<chmod perm="777">
+		  <fileset dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war" />
+		  <fileset refid="other.shared.sources"/>
+		</chmod>
 		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" description="Criar diretorio no server de testes"/>
 		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true" verbose="true">
 			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
