@@ -54,9 +54,6 @@
 	</target>
 
 	<target name="init">
-
-		<!-- ////////   DIRECTORY AND CFC PATH SETUP (used in all targets) -->
-
 		<!-- what's the directory name of your application? this value will be used throughout this build file; if you don't want that, just replace the references to ${application.name} with your desired values -->
 		<property name="application.name" value="mxunit-jenkins" />
 
@@ -70,20 +67,15 @@
 		<!-- what is the cfc dot-notation path to that directory, as ColdFusion sees it? -->
 		<property name="test.cfcpath" value="${application.name}.${test.dir.name}" />
 
-
-
-
-		<!-- ////////   MXUNIT ANT TASK SETUP (used in runtests and junitreport targets) -->
-
 		<!-- what server and port should your tests run against? -->
-		<property name="test.server" value="cfusion.dclicknet.com" />
-		<property name="test.serverport" value="80" />
+		<property name="test.server" value="http://192.168.16.97" />
+		<property name="test.serverport" value="8305" />
 		<!-- what "runner" URL should the tests hit. In this example, you'd be hitting http://localhost:80/DirectoryNameOfYourProject/test/HttpAntRunner.cfc  Simply copy mxunit/samples/HttpAntRunner.cfc into your test directory! -->
 		<!-- <property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" /> -->
-		<!-- acontece que na pasta de jobs do Jenkins não possui um server CF pra rodar o HttpAntRunner.cfc. Assim direcionamos para o framework previamente instalado no Server CFUSION-->
-		<!--<property name="test.runner" value="/mxunit/runner/HttpAntRunner.cfc" />-->
-		<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />
-		
+		<!-- acontece que na pasta de jobs do Jenkins não possui um server CF pra rodar o HttpAntRunner.cfc. Assim direcionamos para o framework previamente instalado no Server de testes-->
+		<property name="test.runner" value="/mxunit/runner/HttpAntRunner.cfc" />
+		<!--<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />-->
+
 		<!-- this is where the xml and html will live for the report generator and Jenkins -->
 		<property name="test.output" location="${test.dir.name}/testresults" />
 		<property name="test.output.xml" location="${test.output}/xml" />
@@ -150,7 +142,7 @@
 		<fail if="tests.bombed" message="Existem testes com erros" />
 		<echoproperties prefix="tests" />
 	</target>
-	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,runUnitTests,dist">
+	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,copyToServerTests,runUnitTests,dist">
 		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
 
@@ -180,7 +172,17 @@
 		</sequential>
 	</macrodef>
 
-
+	<!--Copia os o projeto para ser testado no server de testes -->
+	<target name="copyToServerTests">
+		<description>Copiando para o server de testes..</description>
+		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true">
+			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
+				<include name="**/**" />
+				<exclude name=".git/**" />
+				<exclude name=".settings/**" />
+			</fileset>
+		</copy>
+	</target>
 	<!--Copy files-->
 	<target name="copy" depends="conditionalToCopyFiles" if="copy.them">
 
