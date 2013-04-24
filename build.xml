@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <project name="mxunit-jenkins" basedir="." default="runAllTestsLocal">
-	<!-- no jenkins apontar pata o almo runUnitTests-->
+	<!-- no jenkins apontar pata o alvo runUnitTests-->
 
 	<!--
 	 Jenkins / Hudson Tips:
@@ -86,7 +86,7 @@
 		<!-- ////////   ZIP-FILE SETUP (used by "dist" target) -->
 
 		<!-- where the zip file for deployment will live -->
-		<property name="dist.dir" location="deploy" />
+		<property name="dist.dir" location="distribuicao" />
 
 		<!-- what to call it -->
 		<property name="dist.zip" value="${application.name}.zip" />
@@ -142,7 +142,7 @@
 		<fail if="tests.bombed" message="Existem testes com erros" />
 		<echoproperties prefix="tests" />
 	</target>
-	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,copyToServerTests,runUnitTests,dist">
+	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,copyToServerTests,runUnitTests,deleteFromServerTests,dist">
 		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
 
@@ -156,7 +156,7 @@
 		</junitreport>
 	</target>
 
-	<target name="dist" depends="init" description="Builds the zip file for deployment">
+	<target name="dist" description="Builds the zip file for deployment" depends="conditionalToCopyFiles" if="copy.them">
 		<zip destfile="${dist.dir}/${dist.zip}">
 			<zipfileset dir="." excludes="${test.dir.name}/, deploy/, lib/, .apptacular/, .project, build.xml, settings.xml, .settings" prefix="${dist.prefixInZip}" casesensitive="false" />
 		</zip>
@@ -176,7 +176,7 @@
 	<target name="copyToServerTests">
 		<description>Copiar arquivos para o server de testes</description>
 		<echo>Copiando para o server de testes...</echo>
-		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" />
+		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" description="Criar diretorio no server de testes"/>
 		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true">
 			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
 				<include name="**/**" />
@@ -185,7 +185,11 @@
 			</fileset>
 		</copy>
 	</target>
-	
+	<!--Deleta o projeto que foi copiado para o server de testes -->
+		<target name="deleteFromServerTests" depends="conditionalToCopyFiles" if="copy.them">
+			<echo>Deletando o sarquivos do server de testes...</echo>
+			<delete dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" verbose="true" includeemptydirs="true" />
+		</target>
 	<!--Copy files-->
 	<target name="copy" depends="conditionalToCopyFiles" if="copy.them">
 		<description>Copiando..</description>
