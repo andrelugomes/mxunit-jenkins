@@ -129,7 +129,7 @@
 
 	<target name="dist" description="Builds the zip file for deployment" depends="conditionalToCopyFiles" if="copy.them">
 		<zip destfile="${dist.dir}/${dist.zip}">
-			<zipfileset dir="." excludes="${test.dir.name}/, ant/, .git/, .settings/, ${dist.dir/}, .project, build.xml, settings.xml, .settings, README.md, build.properties " prefix="${dist.prefixInZip}" casesensitive="false" />
+			<zipfileset dir="." excludes="${test.dir.name}/, ant/, .git/, .settings/, ${dist.dir}/, .project, build.xml, settings.xml, .settings, README.md, build.properties " prefix="${dist.prefixInZip}" casesensitive="false" />
 		</zip>
 	</target>
 
