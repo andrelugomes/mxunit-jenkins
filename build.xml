@@ -1,52 +1,26 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <project name="mxunit-jenkins" basedir="." default="runAllTestsLocal">
-	<!-- no jenkins apontar pata o alvo runUnitTests-->
-
-	<!--
-	 Jenkins / Hudson Tips:
-	 
-	 If you stick with the defaults configured in "init", use the following as a guide for populating the Jenkins job configuration for this project
-	 
-	 1) "Test  Report XMLs" configuration will be something like 
-	 
-	 	DirectoryNameOfYourProject/test/testresults/xml/**/*.xml
-	 	
-	 2) "Archive the artifacts" configuration will be something like
-	 	
-	 	DirectoryNameOfYourProject/deploy/*.zip
-	 
-	-->
-
 	<target name="initLocalProperties">
-
 		<property name="application.name" value="mxunit-jenkins" />
-
 		<property name="test.dir.name" value="tests" />
-
 		<property name="test.dir.location" location="${test.dir.name}" />
-
 		<property name="test.cfcpath" value="${application.name}.${test.dir.name}" />
-
 		<property name="test.server" value="127.0.0.1" />
 		<property name="test.serverport" value="8500" />
 		<property name="test.runner" value="/${application.name}/${test.dir.name}/HttpAntRunner.cfc" />
-
 		<property name="test.output" location="${test.dir.name}/testresults" />
 		<property name="test.output.xml" location="${test.output}/xml" />
 		<property name="test.junitoutput" location="${test.output}/html" />
 		<property name="dist.dir" location="dist" />
-
 		<property name="dist.zip" value="${application.name}.zip" />
-
 		<property name="dist.prefixInZip" value="${application.name}" />
-
+		
 		<path id="project.classpath">
 			<fileset dir="ant/lib">
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
-
+		
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
 
 		<echoproperties prefix="test" />
@@ -113,10 +87,9 @@
 		<fail if="tests.bombed" message="Existem testes com erros" />
 		<echoproperties prefix="tests" />
 	</target>
-	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,copyToServerTests,runUnitTests,deleteFromServerTests,dist,homolog">
+	<target name="runAllTests" description="Make output directories and run the MXUnit task" depends="init,clean,copyToServerTests,runUnitTests,deleteFromServerTests,junitreport,dist,homolog">
 		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
-
 
 	<target name="junitreport" depends="init" description="Runs the report without running the tests">
 		<junitreport todir="${test.junitoutput}">
@@ -156,6 +129,7 @@
 			</fileset>
 		</copy>
 	</target>
+	
 	<!--Deleta o projeto que foi copiado para o server de testes -->
 	<target name="deleteFromServerTests" depends="conditionalToCopyFiles" if="copy.them">
 		<echo>Deletando arquivos do server de testes...</echo>
@@ -184,7 +158,6 @@
 
 	<target name="conditionalToCopyFiles">
 		<condition property="copy.them" value="true">
-			<!--<equals arg1="${tests.bombed}" arg2="false"/>-->
 			<isfalse value="${tests.bombed}" />
 		</condition>
 	</target>
