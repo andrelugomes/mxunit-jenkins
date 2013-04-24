@@ -177,17 +177,18 @@
 		<description>Copiar arquivos para o server de testes</description>
 		<echo>Copiando para o server de testes...</echo>
 		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" description="Criar diretorio no server de testes"/>
-		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true">
+		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true" verbose="true">
 			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
 				<include name="**/**" />
 				<exclude name=".git/**" />
 				<exclude name=".settings/**" />
+				<exclude name="distribuicao/**" />
 			</fileset>
 		</copy>
 	</target>
 	<!--Deleta o projeto que foi copiado para o server de testes -->
 		<target name="deleteFromServerTests" depends="conditionalToCopyFiles" if="copy.them">
-			<echo>Deletando o sarquivos do server de testes...</echo>
+			<echo>Deletando arquivos do server de testes...</echo>
 			<delete dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" verbose="true" includeemptydirs="true" />
 		</target>
 	<!--Copy files-->
