@@ -129,7 +129,7 @@
 
 	<target name="dist" description="Builds the zip file for deployment" depends="conditionalToCopyFiles" if="copy.them">
 		<zip destfile="${dist.dir}/${dist.zip}">
-			<zipfileset dir="." excludes="${test.dir.name}/, deploy/, lib/, .apptacular/, .project, build.xml, settings.xml, .settings" prefix="${dist.prefixInZip}" casesensitive="false" />
+			<zipfileset dir="." excludes="${test.dir.name}/, ant/, .git/, .settings/, ${dist.dir/}, .project, build.xml, settings.xml, .settings, README.md, build.properties " prefix="${dist.prefixInZip}" casesensitive="false" />
 		</zip>
 	</target>
 
@@ -155,7 +155,6 @@
 			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
 				<include name="**/**" />
 				<exclude name=".git/**" />
-				<exclude name=".settings/**" />
 				<exclude name="dist/**" />
 			</fileset>
 		</copy>
@@ -180,7 +179,7 @@
 				<exclude name="ant/**" />
 				<exclude name="*.xml" />
 				<exclude name="*.properties" />
-				<exclude name="*.projct" />
+				<exclude name="*.project" />
 				<exclude name="README.md"/>
 			</fileset>
 		</copy>
