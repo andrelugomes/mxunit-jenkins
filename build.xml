@@ -174,7 +174,9 @@
 
 	<!--Copia os o projeto para ser testado no server de testes -->
 	<target name="copyToServerTests">
-		<description>Copiando para o server de testes..</description>
+		<description>Copiar arquivos para o server de testes</description>
+		<echo>Copiando para o server de testes...</echo>
+		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" />
 		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true">
 			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
 				<include name="**/**" />
