@@ -14,7 +14,8 @@
 		<property name="dist.dir" location="dist" />
 		<property name="dist.zip" value="${application.name}.zip" />
 		<property name="dist.prefixInZip" value="${application.name}" />
-		
+		<property name="style.dir" value="ant/xsl" />
+
 		<path id="project.classpath">
 			<fileset dir="ant/lib">
 				<include name="**/*.jar" />
@@ -46,6 +47,7 @@
 		<property name="dist.dir" location="dist" />
 		<property name="dist.zip" value="${application.name}.zip" />
 		<property name="dist.prefixInZip" value="${application.name}" />
+		<property name="style.dir" value="ant/xsl" />
 		<path id="project.classpath">
 			<fileset dir="ant/lib">
 				<include name="**/*.jar" />
@@ -83,7 +85,7 @@
 		</loadresource>
 	</target>
 
-	<target name="runAllTestsLocal" description="Make output directories and run the MXUnit task" depends="initLocalProperties,runUnitTestsLocal,dist">
+	<target name="runAllTestsLocal" description="Make output directories and run the MXUnit task" depends="initLocalProperties,clean,runUnitTestsLocal,junitreport,dist">
 		<fail if="tests.bombed" message="Existem testes com erros" />
 		<echoproperties prefix="tests" />
 	</target>
@@ -91,12 +93,12 @@
 		<fail if="tests.bombed" message="Existem testes com erros" />
 	</target>
 
-	<target name="junitreport" depends="init" description="Runs the report without running the tests">
+	<target name="junitreport" description="Gerar relatorio de testes do JUnit" depends="conditionalToCopyFiles" if="copy.them">
 		<junitreport todir="${test.junitoutput}">
 			<fileset dir="${test.output.xml}">
 				<include name="*.xml" />
 			</fileset>
-			<report format="frames" todir="${test.junitoutput}" />
+			<report format="frames" todir="${test.junitoutput}" styledir="${style.dir}"/>
 		</junitreport>
 	</target>
 
