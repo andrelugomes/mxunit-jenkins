@@ -21,9 +21,13 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
-		
+		<path id="ant.junit.classpath">
+			<fileset dir="ant/lib">
+				<include name="ant-junit-1.8.2.jar" />
+			</fileset>
+		</path>
 		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
-
+		<taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator" classpathref="ant.junit.classpath" />
 		<echoproperties prefix="test" />
 		<echoproperties prefix="dist" />
 	</target>
@@ -53,15 +57,15 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
-		
+
 		<path id="ant.junit.classpath">
 			<fileset dir="ant/lib">
-				<include name="ant-junit-1.8.2.jar.jar" />
+				<include name="ant-junit-1.8.2.jar" />
 			</fileset>
 		</path>
 
-		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath"  />
-		<taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator" classpathref="ant.junit.classpath"  />
+		<taskdef name="mxunittask" classname="org.mxunit.ant.MXUnitAntTask" classpathref="project.classpath" />
+		<taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator" classpathref="ant.junit.classpath" />
 
 	</target>
 
@@ -105,7 +109,7 @@
 			<fileset dir="${test.output.xml}">
 				<include name="*.xml" />
 			</fileset>
-			<report format="frames" todir="${test.junitoutput}" styledir="${style.dir}"/>
+			<report format="frames" todir="${test.junitoutput}" styledir="${style.dir}" />
 		</junitreport>
 	</target>
 
@@ -119,7 +123,7 @@
 		<attribute name="directoryName" />
 		<attribute name="excludes" default="" />
 		<sequential>
-			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}" verbose="true" failureproperty="tests.bombed" errorproperty="tests.bombed" haltonfailure="false" haltonerror="false" >
+			<mxunittask server="${test.server}" port="${test.serverport}" defaultrunner="${test.runner}" outputdir="${test.output.xml}/@{directoryName}" verbose="true" failureproperty="tests.bombed" errorproperty="tests.bombed" haltonfailure="false" haltonerror="false">
 				<directory path="${test.dir.location}/@{directoryName}" recurse="true" packageName="${test.cfcpath}.@{directoryName}" componentPath="${test.cfcpath}.@{directoryName}" excludes="@{excludes}" />
 			</mxunittask>
 		</sequential>
@@ -129,7 +133,7 @@
 	<target name="copyToServerTests">
 		<description>Copiar arquivos para o server de testes</description>
 		<echo>Copiando para o server de testes...</echo>
-		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" description="Criar diretorio no server de testes"/>
+		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" description="Criar diretorio no server de testes" />
 		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true" verbose="true">
 			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
 				<include name="**/**" />
@@ -138,15 +142,15 @@
 			</fileset>
 		</copy>
 	</target>
-	
+
 	<!--Deleta o projeto que foi copiado para o server de testes -->
 	<target name="deleteFromServerTests" depends="conditionalToCopyFiles" if="copy.them">
 		<echo>Deletando arquivos do server de testes...</echo>
 		<delete verbose="true" includeemptydirs="true">
 			<fileset dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" />
-		</delete> 
+		</delete>
 	</target>
-	
+
 	<!--Deploy files in CF SERVER-->
 	<target name="homolog" depends="conditionalToCopyFiles" if="copy.them">
 		<echo>Publicando para homologação</echo>
@@ -160,7 +164,7 @@
 				<exclude name="*.xml" />
 				<exclude name="*.properties" />
 				<exclude name="*.project" />
-				<exclude name="README.md"/>
+				<exclude name="README.md" />
 			</fileset>
 		</copy>
 	</target>

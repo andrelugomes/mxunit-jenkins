@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="127.0.0.1" id="0" name="" package="mxunit-jenkins.tests" tests="14" time="0.533" timestamp="04/24/13 4:33:16 PM">
+  <testsuite errors="0" failures="0" hostname="127.0.0.1" id="0" name="" package="mxunit-jenkins.tests" tests="14" time="0.511" timestamp="04/24/13 4:36:20 PM">
     <properties>
       <property name="PRODUCTVERSION" value="10,0,0,282462" />
       <property name="EXPIRATION" value="{ts &apos;2013-04-11 12:58:21&apos;}" />
@@ -59,22 +59,22 @@
       <property name="GATEWAY_INTERFACE" value="" />
       <property name="AUTH_TYPE" value="" />
       <property name="CONTENT_LENGTH" value="" />
-      <property name="MXUNIT_SUMMARY" value="14,0,0,533" />
+      <property name="MXUNIT_SUMMARY" value="14,0,0,511" />
       <property name="__MXUNITINHERITANCETREE__" value="" />
     </properties>
     <testcase classname="mxunit-jenkins.tests.mockTest" name="funcaoCExecutaFuncaoATest" time="0.003" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionG3ArgumentosDeveRetornarBARComDebugTest" time="0.061" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionCDeveRetornarBTest" time="0.001" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionDDeveRetornarAComMockTest" time="0.051" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionG3ArgumentosDeveRetornarBARComDebugTest" time="0.067" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionCDeveRetornarBTest" time="0.051" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionDDeveRetornarAComMockTest" time="0.042" />
     <testcase classname="mxunit-jenkins.tests.mockTest" name="functionBDeveRetornarBTest" time="0.001" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionEDeveRetornarAtracoAComMockTest" time="0.044" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionFPrivateDeveRetornarFooTest" time="0.047" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionG3ArgumentosDeveRetornarFOOTest" time="0.045" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionDDeveRetornarDTest" time="0.054" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionHRecebeUmArrayERetornaTrue2Test" time="0.05" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionG3ArgumentosDeveRetornarBARTest" time="0.089" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionEDeveRetornarAtracoAComMockTest" time="0.046" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionFPrivateDeveRetornarFooTest" time="0.073" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionG3ArgumentosDeveRetornarFOOTest" time="0.051" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionDDeveRetornarDTest" time="0.045" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionHRecebeUmArrayERetornaTrue2Test" time="0.002" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionG3ArgumentosDeveRetornarBARTest" time="0.042" />
     <testcase classname="mxunit-jenkins.tests.mockTest" name="functionADeveRetornarATest" time="0.002" />
     <testcase classname="mxunit-jenkins.tests.mockTest" name="failTest" time="0.001" />
-    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionHRecebeUmArrayERetornaTrueTest" time="0.002" />
+    <testcase classname="mxunit-jenkins.tests.mockTest" name="functionHRecebeUmArrayERetornaTrueTest" time="0.003" />
   </testsuite>
 </testsuites>
