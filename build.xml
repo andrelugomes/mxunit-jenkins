@@ -129,7 +129,7 @@
 
 	<target name="dist" description="Builds the zip file for deployment" depends="conditionalToCopyFiles" if="copy.them">
 		<zip destfile="${dist.dir}/${dist.zip}">
-			<zipfileset dir="." excludes="${test.dir.name}/, ant/, .git/, .settings/, ${dist.dir}/, .project, build.xml, settings.xml, .settings, README.md, build.properties " prefix="${dist.prefixInZip}" casesensitive="false" />
+			<zipfileset dir="." excludes="${test.dir.name}/, ant/, .git/, .settings/, dist/, .project, build.xml, settings.xml, .settings, README.md, build.properties " prefix="${dist.prefixInZip}" casesensitive="false" />
 		</zip>
 	</target>
 
@@ -147,9 +147,6 @@
 	<target name="copyToServerTests">
 		<description>Copiar arquivos para o server de testes</description>
 		<echo>Copiando para o server de testes...</echo>
-		<!--<chmod perm="777">
-		  <fileset dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war" />
-		</chmod>-->
 		<mkdir dir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}" description="Criar diretorio no server de testes"/>
 		<copy todir="/opt/jrun4/servers/testes/cfusion.ear/cfusion.war/${application.name}/" overwrite="true" verbose="true">
 			<fileset dir="/var/lib/jenkins/jobs/${application.name}/workspace/">
