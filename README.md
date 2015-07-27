@@ -1,4 +1,4 @@
-mxunit-jenkins
-==============
+# Coldfusion CI 
 
-testes de integracao do mxunit com jenkins
+## MXUnit Jenkins
+Testes de integracao do mxunit com jenkins
